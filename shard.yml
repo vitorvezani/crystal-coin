@@ -1,0 +1,13 @@
+name: crystal_coin
+version: 0.1.0
+
+authors:
+  - your-name-here <your-email-here>
+
+targets:
+  crystal_coin:
+    main: src/crystal_coin.cr
+
+crystal: 0.25.1
+
+license: MIT
