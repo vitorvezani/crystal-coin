@@ -5,6 +5,8 @@ authors:
   - Vitor Rodrigo Vezani <vitor.vezani@gmail.com>
 
 dependencies:
+  kemal:
+    github: kemalcr/kemal
   openssl:
     github: datanoise/openssl.cr
 
