@@ -1,7 +1,7 @@
 # src/server.cr
 
 require "kemal"
-require "./crystal_coin"
+require "./crystal_coin/*"
 require "uuid"
 
 # Generate a globally unique address for this node
@@ -19,11 +19,20 @@ get "/mine" do
 end
 
 get "/pending" do
-  "Send pending transactions as json objects"
+  { transactions: blockchain.uncommitted_transactions }.to_json
 end
 
-post "/transactions/new" do
-  "We'll add a new transaction"
+post "/transactions/new" do |env|
+
+  transaction = CrystalCoin::Transaction.new(
+    from: env.params.json["from"].as(String),
+    to:  env.params.json["to"].as(String),
+    amount:  env.params.json["amount"].as(Int64)
+  )
+
+  blockchain.add_transaction(transaction)
+
+  "Transaction #{transaction} has been added to the node"
 end
 
 Kemal.run

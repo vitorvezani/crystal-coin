@@ -18,8 +18,8 @@ module CrystalCoin
       @current_hash = calc_hash_with_nonce(@nonce)
     end
 
-    def self.first(transaction = Transaction.new("","",0))
-      Block.new(transactions: [transaction], previous_hash: "0")
+    def self.first()
+      Block.new(transactions: [] of Transaction, previous_hash: "0")
     end
 
     def self.next(previous_block, transactions = [] of Transaction)
@@ -30,15 +30,4 @@ module CrystalCoin
       )
     end
   end
-end
-
-blockchain = [ CrystalCoin::Block.first ]
-puts blockchain.inspect
-previous_block = blockchain[0]
-
-5.times do |i|
-  new_block  = CrystalCoin::Block.next(previous_block: previous_block)
-  blockchain << new_block
-  previous_block = new_block
-  puts new_block.inspect
 end
