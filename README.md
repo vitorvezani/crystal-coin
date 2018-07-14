@@ -1,11 +1,11 @@
 # crystal_coin
 
-Crystal Coin project to learn crystal programming language and blockchain [original tutorial](https://www.toptal.com/blockchain/crystal-programming-language-tutorial)
+Crystal Coin project to learn [Crystal Programming Language](https://crystal-lang.org) and [Blockchain](https://pt.wikipedia.org/wiki/Blockchain) - [Original Post](https://www.toptal.com/blockchain/crystal-programming-language-tutorial)
 
 ## Installation
 
--Linux Mint 19
-- Crystal
+- Linux Mint 19
+- Crystal 0.25.1 [b782738ff] (2018-06-27)
 
 ## Usage
 
@@ -14,13 +14,14 @@ Crystal Coin project to learn crystal programming language and blockchain [origi
 
 ## Development
 
-localhost:3000
-curl -X POST http://0.0.0.0:3000/nodes/register -H "Content-Type: application/json" -d '{"nodes": ["http://0.0.0.0:3001"]}'
-curl -X POST http://0.0.0.0:3001/transactions/new -H "Content-Type: application/json" -d '{"from": "eqbal", "to":"spiderman", "amount": 100}'
-curl http://0.0.0.0:3001/mine
-curl http://0.0.0.0:3000/chain
-curl http://0.0.0.0:3000/nodes/resolve
-curl http://0.0.0.0:3000/chain
+`crystal run src/server.cr` on port 3000
+`crystal run src/server.cr` on port 3001
+`curl -X POST http://0.0.0.0:3000/nodes/register -H "Content-Type: application/json" -d '{"nodes": ["http://0.0.0.0:3001"]}'`
+`curl -X POST http://0.0.0.0:3001/transactions/new -H "Content-Type: application/json" -d '{"from": "eqbal", "to":"spiderman", "amount": 100}'`
+`curl http://0.0.0.0:3001/mine`
+`curl http://0.0.0.0:3000/chain`
+`curl http://0.0.0.0:3000/nodes/resolve`
+`curl http://0.0.0.0:3000/chain`
 
 ## Contributing
 
