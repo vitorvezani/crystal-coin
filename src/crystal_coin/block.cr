@@ -1,13 +1,18 @@
 require "./proof_of_work"
+require "./transaction"
 
 module CrystalCoin
 	class Block
     include ProofOfWork
 
-    property current_hash : String
-    property index : Int32
-    property nonce : Int32
-    property previous_hash : String
+    JSON.mapping(
+      index: Int32,
+      current_hash: String,
+      nonce: Int32,
+      previous_hash: String,
+      transactions: Array(Transaction),
+      timestamp: Time
+    )
 
     def initialize(index = 0, transactions = [] of Transaction, previous_hash = "hash")
       @transactions = transactions
@@ -19,7 +24,7 @@ module CrystalCoin
     end
 
     def self.first()
-      Block.new(transactions: [] of Transaction, previous_hash: "0")
+      Block.new(previous_hash: "0")
     end
 
     def self.next(previous_block, transactions = [] of Transaction)

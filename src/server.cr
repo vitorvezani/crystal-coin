@@ -1,8 +1,11 @@
-# src/server.cr
-
 require "kemal"
-require "./crystal_coin/*"
 require "uuid"
+
+require "./crystal_coin/*"
+
+before_all do |env|
+  env.response.content_type = "application/json"
+end
 
 # Generate a globally unique address for this node
 node_identifier = UUID.random.to_s
@@ -11,11 +14,12 @@ node_identifier = UUID.random.to_s
 blockchain = CrystalCoin::Blockchain.new
 
 get "/chain" do
-  "Send the blockchain as json objects"
+  { chain: blockchain.chain }.to_json
 end
 
 get "/mine" do
-  "We'll mine a new Block"
+  blockchain.mine
+  "Block with index=#{blockchain.chain.last.index} is mined."
 end
 
 get "/pending" do
@@ -24,7 +28,7 @@ end
 
 post "/transactions/new" do |env|
 
-  transaction = CrystalCoin::Transaction.new(
+  transaction = CrystalCoin::Block::Transaction.new(
     from: env.params.json["from"].as(String),
     to:  env.params.json["to"].as(String),
     amount:  env.params.json["amount"].as(Int64)

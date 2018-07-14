@@ -1,4 +1,7 @@
+require "json"
+
 module CrystalCoin
+  class Block
     class Transaction
 
       JSON.mapping({
@@ -14,4 +17,5 @@ module CrystalCoin
       def initialize(@from, @to, @amount)
       end
     end
+  end
 end
