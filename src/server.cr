@@ -1,3 +1,4 @@
+require "option_parser"
 require "kemal"
 require "uuid"
 
@@ -39,4 +40,24 @@ post "/transactions/new" do |env|
   "Transaction #{transaction} has been added to the node"
 end
 
-Kemal.run
+post "/nodes/register" do |env|
+  nodes = env.params.json["nodes"].as(Array)
+
+  raise "Empty array" if nodes.empty?
+
+  nodes.each do |node|
+    blockchain.register_node(node.to_s)
+  end
+
+  "New nodes have been added: #{blockchain.nodes}"
+end
+
+get "/nodes/resolve" do
+  if blockchain.resolve
+    "Successfully updated the chain"
+  else
+    "Current chain is up-to-date"
+  end
+end
+
+Kemal.run(3001)
