@@ -1,18 +1,26 @@
 # crystal_coin
 
-TODO: Write a description here
+Crystal Coin project to learn crystal programming language and blockchain [original tutorial](https://www.toptal.com/blockchain/crystal-programming-language-tutorial)
 
 ## Installation
 
-TODO: Write installation instructions here
+-Linux Mint 19
+- Crystal
 
 ## Usage
 
-TODO: Write usage instructions here
+1. shards
+2. crystal run src/server.cr
 
 ## Development
 
-TODO: Write development instructions here
+localhost:3000
+curl -X POST http://0.0.0.0:3000/nodes/register -H "Content-Type: application/json" -d '{"nodes": ["http://0.0.0.0:3001"]}'
+curl -X POST http://0.0.0.0:3001/transactions/new -H "Content-Type: application/json" -d '{"from": "eqbal", "to":"spiderman", "amount": 100}'
+curl http://0.0.0.0:3001/mine
+curl http://0.0.0.0:3000/chain
+curl http://0.0.0.0:3000/nodes/resolve
+curl http://0.0.0.0:3000/chain
 
 ## Contributing
 
