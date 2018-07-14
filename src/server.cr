@@ -2,12 +2,13 @@
 
 require "kemal"
 require "./crystal_coin"
+require "uuid"
 
 # Generate a globally unique address for this node
 node_identifier = UUID.random.to_s
 
 # Create our Blockchain
-blockchain = Blockchain.new
+blockchain = CrystalCoin::Blockchain.new
 
 get "/chain" do
   "Send the blockchain as json objects"

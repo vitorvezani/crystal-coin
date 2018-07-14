@@ -2,17 +2,6 @@ require "./proof_of_work"
 
 module CrystalCoin
 	class Block
-		
-    class Transaction
-
-      property from : String
-      property to : String
-      property amount : Int32
-
-      def initialize(@from, @to, @amount)
-      end
-    end
-
     include ProofOfWork
 
     property current_hash : String
@@ -29,9 +18,8 @@ module CrystalCoin
       @current_hash = calc_hash_with_nonce(@nonce)
     end
 
-    def self.first(data = "Genesis Block")
-      # todo
-      Block.new(data: data, previous_hash: "0")
+    def self.first(transaction = Transaction.new("","",0))
+      Block.new(transactions: [transaction], previous_hash: "0")
     end
 
     def self.next(previous_block, transactions = [] of Transaction)
